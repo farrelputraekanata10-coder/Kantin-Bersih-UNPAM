@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Dashboard Admin · Kantin Bersih UNPAM{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="section-head"><div><span class="eyebrow">PENGELOLAAN</span><h1 class="page-title" style="margin-top:12px">Dashboard admin</h1><p>Perbarui status laporan setelah tindak lanjut dilakukan.</p></div><a class="btn secondary" href="{{ url_for('admin_logout') }}">Keluar</a></div>
+    <div class="panel admin-table-wrap">
+      {% if reports %}
+      <table class="admin-table">
+        <thead><tr><th>ID / Waktu</th><th>Pelapor & lokasi</th><th>Masalah</th><th>Foto</th><th>Status</th><th>Aksi</th></tr></thead>
+        <tbody>
+        {% for r in reports %}
+          <tr>
+            <td><strong>#{{ r.id }}</strong><br><span class="hint">{{ r.created_at }}</span></td>
+            <td><strong>{{ r.name }}</strong><br>{{ r.location }}</td>
+            <td><strong>{{ r.category }}</strong><br>{{ r.description }}</td>
+            <td>{% if r.photo %}<a href="{{ url_for('uploaded_file', filename=r.photo) }}" target="_blank" rel="noopener">Lihat foto</a>{% else %}<span class="hint">Tidak ada</span>{% endif %}</td>
+            <td>
+              <form class="inline-form" method="post" action="{{ url_for('update_status', report_id=r.id) }}">
+                <select name="status" aria-label="Status laporan {{ r.id }}">
+                  {% for s in ['Menunggu','Diproses','Selesai'] %}<option value="{{ s }}" {% if r.status == s %}selected{% endif %}>{{ s }}</option>{% endfor %}
+                </select>
+                <button class="btn small" type="submit">Simpan</button>
+              </form>
+            </td>
+            <td><form method="post" action="{{ url_for('delete_report', report_id=r.id) }}" onsubmit="return confirm('Hapus laporan #{{ r.id }}?')"><button class="btn small danger" type="submit">Hapus</button></form></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div class="empty">Belum ada laporan masuk.</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

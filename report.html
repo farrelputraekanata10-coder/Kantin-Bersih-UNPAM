@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Buat Laporan · Kantin Bersih UNPAM{% endblock %}
+{% block content %}
+<div class="container form-wrap">
+  <span class="eyebrow">FORMULIR PELAPORAN</span>
+  <h1 class="page-title">Laporkan area yang kotor</h1>
+  <p class="subtext">Isi informasi berikut agar laporan lebih mudah dipahami dan ditindaklanjuti. Foto bersifat opsional.</p>
+  <form class="panel" method="post" enctype="multipart/form-data">
+    <div class="form-grid">
+      <div class="field">
+        <label for="name">Nama pelapor *</label>
+        <input id="name" name="name" maxlength="80" required placeholder="Contoh: Farrel" value="{{ form.get('name','') }}">
+      </div>
+      <div class="field">
+        <label for="location">Lokasi sampah *</label>
+        <select id="location" name="location" required>
+          <option value="">Pilih lokasi</option>
+          {% for loc in ['Meja makan kantin','Area tempat duduk','Dekat tempat sampah','Jalur pejalan kaki','Area penjual makanan','Sekitar Gedung Teknik Elektro','Lokasi lainnya'] %}
+          <option value="{{ loc }}" {% if form.get('location') == loc %}selected{% endif %}>{{ loc }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field full">
+        <label for="category">Jenis masalah *</label>
+        <select id="category" name="category" required>
+          <option value="">Pilih jenis masalah</option>
+          {% for cat in ['Sampah berserakan','Tempat sampah penuh','Sisa makanan','Plastik atau kemasan','Bau tidak sedap','Lainnya'] %}
+          <option value="{{ cat }}" {% if form.get('category') == cat %}selected{% endif %}>{{ cat }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field full">
+        <label for="description">Deskripsi kondisi *</label>
+        <textarea id="description" name="description" maxlength="1000" required placeholder="Jelaskan kondisi dan titik lokasi secara singkat...">{{ form.get('description','') }}</textarea>
+        <span class="hint">Maksimal 1.000 karakter. Hindari memasukkan data pribadi orang lain.</span>
+      </div>
+      <div class="field full">
+        <label for="photo">Foto pendukung (opsional)</label>
+        <input id="photo" type="file" name="photo" accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp">
+        <span class="hint">Format PNG, JPG, JPEG, atau WEBP. Maksimal 5 MB.</span>
+      </div>
+    </div>
+    <div class="form-actions"><button class="btn" type="submit">Kirim Laporan →</button><a class="btn secondary" href="{{ url_for('index') }}">Batal</a></div>
+  </form>
+</div>
+{% endblock %}

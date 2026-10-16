@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#176b45">
+  <meta name="description" content="Website pelaporan kebersihan area kantin dekat Gedung Teknik Elektro Universitas Pamulang.">
+  <title>{% block title %}Kantin Bersih UNPAM{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="{{ url_for('index') }}">
+      <span class="brand-mark">♻</span>
+      <span>Kantin Bersih <small>UNIVERSITAS PAMULANG</small></span>
+    </a>
+    <nav class="nav-links">
+      <a href="{{ url_for('index') }}">Beranda</a>
+      <a href="{{ url_for('reports') }}">Laporan</a>
+      <a class="optional" href="{{ url_for('admin_login') }}">Admin</a>
+      <a class="nav-cta" href="{{ url_for('report') }}">+ Buat Laporan</a>
+    </nav>
+  </div>
+</header>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="container flash-wrap">
+    {% for category, message in messages %}
+      <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+<main>{% block content %}{% endblock %}</main>
+<footer class="footer">
+  <div class="container footer-inner">
+    <span><strong>Kantin Bersih UNPAM</strong> · Inisiatif kebersihan lingkungan kampus</span>
+    <span>Mulai dari diri sendiri, buang sampah pada tempatnya.</span>
+  </div>
+</footer>
+</body>
+</html>

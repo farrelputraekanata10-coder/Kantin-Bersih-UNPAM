@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">🌱 LINGKUNGAN BERSIH, BELAJAR NYAMAN</span>
+      <h1>Kantin bersih,<br>nyaman untuk semua.</h1>
+      <p>Platform sederhana untuk melaporkan sampah yang berserakan di area kantin dekat Gedung Teknik Elektro Universitas Pamulang.</p>
+      <div class="hero-actions">
+        <a class="btn" href="{{ url_for('report') }}">Laporkan Sampah <span aria-hidden="true">&nbsp;→</span></a>
+        <a class="btn secondary" href="{{ url_for('reports') }}">Lihat Laporan</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="leaf-art">🌿</div>
+      <h3>Jaga ruang bersama</h3>
+      <p>Buang sampah pada tempatnya. Jika menemukan area yang kotor, bantu laporkan agar bisa segera ditangani.</p>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div><h2>Ringkasan laporan</h2><p>Data laporan kebersihan yang tercatat di website.</p></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="stat-icon">📋</span><div class="stat-label">Total laporan</div><div class="stat-num">{{ total }}</div></div>
+      <div class="stat"><span class="stat-icon">⏳</span><div class="stat-label">Menunggu</div><div class="stat-num">{{ pending }}</div></div>
+      <div class="stat"><span class="stat-icon">✅</span><div class="stat-label">Selesai ditangani</div><div class="stat-num">{{ handled }}</div></div>
+    </div>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="section-head"><div><h2>Bagaimana cara kerjanya?</h2><p>Pelaporan singkat untuk membantu menjaga kenyamanan kantin.</p></div></div>
+    <div class="cards">
+      <article class="card"><div class="card-icon">📍</div><h3>1. Pilih lokasi</h3><p>Tentukan area kantin yang perlu dibersihkan agar lokasi masalah lebih jelas.</p></article>
+      <article class="card"><div class="card-icon">📸</div><h3>2. Kirim laporan</h3><p>Jelaskan kondisi sampah dan tambahkan foto bila diperlukan.</p></article>
+      <article class="card"><div class="card-icon">🧹</div><h3>3. Pantau status</h3><p>Lihat apakah laporan masih menunggu, sedang diproses, atau sudah selesai.</p></article>
+    </div>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="section-head"><div><h2>Laporan terbaru</h2><p>Beberapa laporan yang baru dikirim.</p></div><a href="{{ url_for('reports') }}" class="btn secondary">Semua laporan</a></div>
+    {% if recent %}
+    <div class="report-list">
+      {% for r in recent %}
+      <article class="report-card">
+        {% if r.photo %}<img class="report-photo" src="{{ url_for('uploaded_file', filename=r.photo) }}" alt="Foto laporan sampah">{% endif %}
+        <div class="meta"><span>#{{ r.id }}</span><span>{{ r.created_at }}</span><span class="pill {{ 'done' if r.status == 'Selesai' else ('progress' if r.status == 'Diproses' else 'wait') }}">{{ r.status }}</span></div>
+        <h3>{{ r.category }} · {{ r.location }}</h3>
+        <p>{{ r.description }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty">Belum ada laporan. Jadilah orang pertama yang membantu menjaga kebersihan kantin.</div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
