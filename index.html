@@ -1,62 +1,61 @@
-{% extends "base.html" %}
-{% block content %}
-<section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <span class="eyebrow">🌱 LINGKUNGAN BERSIH, BELAJAR NYAMAN</span>
-      <h1>Kantin bersih,<br>nyaman untuk semua.</h1>
-      <p>Platform sederhana untuk melaporkan sampah yang berserakan di area kantin dekat Gedung Teknik Elektro Universitas Pamulang.</p>
-      <div class="hero-actions">
-        <a class="btn" href="{{ url_for('report') }}">Laporkan Sampah <span aria-hidden="true">&nbsp;→</span></a>
-        <a class="btn secondary" href="{{ url_for('reports') }}">Lihat Laporan</a>
-      </div>
-    </div>
-    <div class="hero-card">
-      <div class="leaf-art">🌿</div>
-      <h3>Jaga ruang bersama</h3>
-      <p>Buang sampah pada tempatnya. Jika menemukan area yang kotor, bantu laporkan agar bisa segera ditangani.</p>
-    </div>
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#14532d">
+<meta name="description" content="Kantin Bersih UNPAM — ajakan menjaga kebersihan area kantin Gedung Teknik Elektro.">
+<title>Kantin Bersih UNPAM</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#beranda"><span class="brand-icon">♻</span><span>Kantin Bersih <small>UNIVERSITAS PAMULANG</small></span></a>
+  <nav><a href="#tentang">Tentang</a><a href="#langkah">Aksi Kita</a><a class="nav-cta" href="#lapor">Buat Laporan</a></nav>
+</header>
+<main>
+<section class="hero" id="beranda">
+  <div class="hero-copy">
+    <span class="eyebrow">🌱 MULAI DARI KITA</span>
+    <h1>Kantin bersih,<br><em>kuliah lebih nyaman.</em></h1>
+    <p>Yuk, jaga area kantin dekat Gedung Teknik Elektro UNPAM supaya tetap bersih, rapi, dan nyaman untuk semua.</p>
+    <div class="hero-actions"><a class="button primary" href="#langkah">Mulai dari hal kecil <span>↗</span></a><a class="button secondary" href="#lapor">Laporkan kondisi</a></div>
+    <div class="hero-note"><span class="dot"></span> Satu kebiasaan baik bisa membawa perubahan.</div>
+  </div>
+  <div class="hero-art" aria-label="Ilustrasi lingkungan kampus yang bersih">
+    <div class="sun"></div><div class="cloud cloud1"></div><div class="cloud cloud2"></div>
+    <div class="hill hill-back"></div><div class="hill hill-front"></div>
+    <div class="campus"><div class="roof"></div><div class="building"><div class="windows"></div><div class="door"></div></div></div>
+    <div class="tree tree1"><i></i><b></b></div><div class="tree tree2"><i></i><b></b></div>
+    <div class="bin"><div class="bin-lid"></div><div class="bin-body">♻</div></div>
+    <div class="art-label">LINGKUNGAN BERSIH, TANGGUNG JAWAB BERSAMA</div>
   </div>
 </section>
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <div><h2>Ringkasan laporan</h2><p>Data laporan kebersihan yang tercatat di website.</p></div>
-    </div>
-    <div class="stats">
-      <div class="stat"><span class="stat-icon">📋</span><div class="stat-label">Total laporan</div><div class="stat-num">{{ total }}</div></div>
-      <div class="stat"><span class="stat-icon">⏳</span><div class="stat-label">Menunggu</div><div class="stat-num">{{ pending }}</div></div>
-      <div class="stat"><span class="stat-icon">✅</span><div class="stat-label">Selesai ditangani</div><div class="stat-num">{{ handled }}</div></div>
-    </div>
+<section class="stats" id="tentang">
+  <div><span class="stat-icon">📍</span><strong>Area Kantin</strong><small>Dekat Gedung Teknik Elektro</small></div>
+  <div><span class="stat-icon">🧹</span><strong>Jaga Kebersihan</strong><small>Buang sampah pada tempatnya</small></div>
+  <div><span class="stat-icon">🤝</span><strong>Mulai Bersama</strong><small>Semua pengguna punya peran</small></div>
+</section>
+<section class="section" id="langkah">
+  <div class="section-heading"><span class="eyebrow">AKSI SEDERHANA</span><h2>Area bersih dimulai dari <em>kebiasaan kita.</em></h2><p>Hal kecil yang dilakukan secara konsisten bisa membuat area kantin lebih nyaman.</p></div>
+  <div class="cards">
+    <article class="card"><div class="card-icon green">🗑️</div><h3>Buang pada tempatnya</h3><p>Pastikan bungkus makanan, tisu, dan sampah lainnya masuk ke tempat sampah.</p></article>
+    <article class="card"><div class="card-icon orange">🚭</div><h3>Jangan tinggalkan puntung</h3><p>Puntung rokok juga termasuk sampah. Jangan membuangnya sembarangan.</p></article>
+    <article class="card"><div class="card-icon blue">📣</div><h3>Ingatkan dengan sopan</h3><p>Ajak teman menjaga kebersihan tanpa menyalahkan atau mempermalukan siapa pun.</p></article>
   </div>
 </section>
-<section class="section" style="padding-top:0">
-  <div class="container">
-    <div class="section-head"><div><h2>Bagaimana cara kerjanya?</h2><p>Pelaporan singkat untuk membantu menjaga kenyamanan kantin.</p></div></div>
-    <div class="cards">
-      <article class="card"><div class="card-icon">📍</div><h3>1. Pilih lokasi</h3><p>Tentukan area kantin yang perlu dibersihkan agar lokasi masalah lebih jelas.</p></article>
-      <article class="card"><div class="card-icon">📸</div><h3>2. Kirim laporan</h3><p>Jelaskan kondisi sampah dan tambahkan foto bila diperlukan.</p></article>
-      <article class="card"><div class="card-icon">🧹</div><h3>3. Pantau status</h3><p>Lihat apakah laporan masih menunggu, sedang diproses, atau sudah selesai.</p></article>
-    </div>
-  </div>
+<section class="report-section" id="lapor">
+  <div class="report-copy"><span class="eyebrow">PUNYA MASUKAN?</span><h2>Bantu kami menjaga<br><em>kantin tetap bersih.</em></h2><p>Catat kondisi yang perlu diperhatikan agar bisa ditindaklanjuti. Versi demo ini menyimpan laporan hanya di browser perangkat yang digunakan.</p><div class="notice">ℹ️ <span>Demo GitHub Pages: laporan tidak terkirim ke pengelola kampus dan tidak tersimpan di server.</span></div></div>
+  <form id="reportForm" class="report-form">
+    <label for="category">Jenis kondisi</label><select id="category" required><option value="">Pilih kondisi</option><option>Sampah berserakan</option><option>Puntung rokok</option><option>Tempat sampah penuh</option><option>Lainnya</option></select>
+    <label for="location">Lokasi</label><input id="location" required maxlength="120" placeholder="Contoh: sisi kantin dekat Gedung Teknik Elektro">
+    <label for="description">Keterangan</label><textarea id="description" required maxlength="700" rows="4" placeholder="Ceritakan kondisi yang ditemukan..."></textarea>
+    <button class="button primary submit" type="submit">Simpan laporan demo <span>→</span></button>
+    <p class="form-message" id="formMessage" role="status"></p>
+  </form>
 </section>
-<section class="section" style="padding-top:0">
-  <div class="container">
-    <div class="section-head"><div><h2>Laporan terbaru</h2><p>Beberapa laporan yang baru dikirim.</p></div><a href="{{ url_for('reports') }}" class="btn secondary">Semua laporan</a></div>
-    {% if recent %}
-    <div class="report-list">
-      {% for r in recent %}
-      <article class="report-card">
-        {% if r.photo %}<img class="report-photo" src="{{ url_for('uploaded_file', filename=r.photo) }}" alt="Foto laporan sampah">{% endif %}
-        <div class="meta"><span>#{{ r.id }}</span><span>{{ r.created_at }}</span><span class="pill {{ 'done' if r.status == 'Selesai' else ('progress' if r.status == 'Diproses' else 'wait') }}">{{ r.status }}</span></div>
-        <h3>{{ r.category }} · {{ r.location }}</h3>
-        <p>{{ r.description }}</p>
-      </article>
-      {% endfor %}
-    </div>
-    {% else %}
-    <div class="empty">Belum ada laporan. Jadilah orang pertama yang membantu menjaga kebersihan kantin.</div>
-    {% endif %}
-  </div>
-</section>
-{% endblock %}
+<section class="saved" id="savedSection" hidden><div class="saved-head"><h2>Laporan demo di perangkat ini</h2><button id="clearReports" class="text-button" type="button">Hapus semua</button></div><div id="reportList"></div></section>
+</main>
+<footer><a class="brand footer-brand" href="#beranda"><span class="brand-icon">♻</span><span>Kantin Bersih <small>UNIVERSITAS PAMULANG</small></span></a><p>Proyek edukasi kebersihan lingkungan kampus · Universitas Pamulang</p><a href="#beranda" class="backtop">Kembali ke atas ↑</a></footer>
+<script src="script.js"></script>
+</body></html>
